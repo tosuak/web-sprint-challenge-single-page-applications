@@ -39,6 +39,7 @@ export default function PizzaForm(props) {
                             value={values.pizzaSize}
                             onChange={onChange}
                             name="pizzaSize"
+                            id='size-dropdown'
                         >
                             <option value=''>- Select an option -</option>
                             <option value='Small'>Small</option>
