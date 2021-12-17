@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import {Route, Link} from 'react-router-dom'
+import { Route, Link} from 'react-router-dom'
 import axios from "axios";
 import * as yup from 'yup';
 import schema from './validation/formSchema';
 import PizzaForm from "./components/PizzaForm";
+import Home from "./components/Home";
 import Pizza from "./components/Pizza";
 import Confirmation from "./components/Confirmation";
 
@@ -80,32 +81,30 @@ useEffect(() => {
   schema.isValid(formValues).then(valid => setDisabled(!valid))
 },[formValues])
 
-function Home() {
-  return <h2>HomePage</h2>
-}
+
 
 
   return (
     <div className='container'>
-     <header><h1>Bloom Eats</h1></header>
-        <Link to='/'>Home</Link>
-        <Link to='/pizza'>Order Pizza</Link>
-        <Route exact path='/' component={Home} />
+     <header>
+       <h1>Bloom Eats</h1>
+        
+      </header>    
+        <Route exact path='/' component={Home}>
+          <Home />
+        </Route>
 
-        <PizzaForm 
-        values={formValues}
-        change={inputChange}
-        submit={formSubmit}
-        disabled={disabled}
-        errors={formErrors}
-      />
-      {/* {
-        orders.map(order => {
-          return (
-            <Pizza key={order.id} details={order} />
-          )
-        })
-      } */}
+        <Route path='/pizza' component={PizzaForm} >
+          <PizzaForm 
+            values={formValues}
+            change={inputChange}
+            submit={formSubmit}
+            disabled={disabled}
+            errors={formErrors}
+          />
+          <Link to='/'><button>Home</button></Link>
+        </Route>
+      
     </div>
   );
 };

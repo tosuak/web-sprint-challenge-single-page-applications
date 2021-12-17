@@ -16,12 +16,14 @@ export default function PizzaForm(props) {
   }
 
     return (
+       
         <form id="pizza-form" onSubmit={onSubmit}>
             <h2>Build Your Own Pizza</h2>        
                 <div className="for-group inputs">
                     <h4>Build Your Own Pizza</h4>
+
+                    <div>{errors.name}</div>
                     <label>Name:
-                        <div>{errors.name}</div>
                         <input
                             id="name-input" 
                             value={values.name}
@@ -31,8 +33,8 @@ export default function PizzaForm(props) {
                         />
                     </label>
 
+                        <div>{errors.pizzaSize}</div>
                     <label>Choice of Size
-                       <div>{errors.pizzaSize}</div> 
                         <select
                             value={values.pizzaSize}
                             onChange={onChange}
@@ -90,6 +92,7 @@ export default function PizzaForm(props) {
 
                     <div className="form-group toppings">
                         <h4>Toppings</h4>
+                        <p>Optional</p>
                         <label>Pepperoni
                             <input 
                                 type='checkbox'
@@ -145,6 +148,6 @@ export default function PizzaForm(props) {
                 <div className="form-group submit">
                     <button disabled={disabled} id="order-button">Add to Order</button>
                 </div>    
-        </form>
+        </form>  
     )
 }
