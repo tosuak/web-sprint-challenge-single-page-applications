@@ -8,7 +8,8 @@ const formSchema = yup.object().shape({
     pineapple: yup.boolean(),
     onions: yup.boolean(),
     sausages: yup.boolean(),
-    mushrooms: yup.boolean()
+    mushrooms: yup.boolean(),
+    specialOrder: yup.string().trim()
 })
 
 export default formSchema;

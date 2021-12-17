@@ -1,65 +1,28 @@
-import React from "react";
+import React from 'react'
 
-export default function Pizza(props) {
-    const { values, submit, change, disabled, errors } = props;
-
-    const onSubmit = evt => {
-        evt.preventDefault()
-        submit()
-    }
-
-    const onChange = evt => {
-        const { name, value, checked, type } = evt.target
-        const valueToUse = type === 'checkbox' ? checked : value;
-        change(name, valueToUse)
+function Pizza({ details }) {
+  if (!details) {
+    return <h3>Working fetching your Pizza&apos;s details...</h3>
   }
 
-    return (
-        <form id="pizza-form" onSubmit={onSubmit}>
-            <div>
-                <h2>Build Your Own Pizza</h2>
-                <div className="errors">
-                    <div>{errors.name}</div>
-                    <div>{errors.pizzaSize}</div>
-                    <div>{errors.pizzaSauce}</div>
-                </div>
+  return (
+    <div className='pizza container'>
+      <h2>{details.name}</h2>
+      <p>Pizza Size: {details.pizzaSize}</p>
+      <p>Pizza Sauce: {details.pizzaSauce}</p>
+      <p>Special Instructions: {details.specialOrder}</p>
 
-                <div className="for-group inputs">
-                    <h4>Build Your Own Pizza</h4>
-                    <label>Name:
-                        <input
-                            id="name-input" 
-                            value={values.name}
-                            onChange={onChange}
-                            name="name"
-                            type='text'
-                        />
-                    </label>
-
-                    <label>Choice of Size
-                        <select
-                            value={values.pizzaSize}
-                            onChange={onChange}
-                            name="pizzaSize"
-                        >
-                            <option value=''>- Select an option -</option>
-                            <option value='Small'>Small</option>
-                            <option value='Medium'>Medium</option>     
-                            <option value='Large'>Large</option> 
-                        </select>
-                    </label>
-
-                    <label>Special Instructions:
-                        <input
-                            value={values.specialOrder}
-                            onChange={onChange}
-                            name="specialOrder"
-                            type='text'
-                        />
-                    </label>
-                </div>
-            </div>
-            <button disabled={disabled}>Add to Order</button>
-        </form>
-    )
+      {
+        !!details.toppings && !!details.toppings.length &&
+        <div>
+          Toppings:
+          <ul>
+            {details.toppings.map((like, idx) => <li key={idx}>{like}</li>)}
+          </ul>
+        </div>
+      }
+    </div>
+  )
 }
+
+export default Pizza

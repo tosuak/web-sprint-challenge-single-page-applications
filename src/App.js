@@ -3,6 +3,7 @@ import {Route, Link} from 'react-router-dom'
 import axios from "axios";
 import * as yup from 'yup';
 import schema from './validation/formSchema';
+import PizzaForm from "./components/PizzaForm";
 import Pizza from "./components/Pizza";
 import Confirmation from "./components/Confirmation";
 
@@ -21,7 +22,6 @@ const initialFormErrors = {
   name: '',
   pizzaSize: '',
   pizzaSauce: '',
-  specialOrder: ''
 }
 const initialOrders = [];
 const initialDisabled = true;
@@ -89,19 +89,23 @@ function Home() {
     <div className='container'>
      <header><h1>Bloom Eats</h1></header>
         <Link to='/'>Home</Link>
-        <Link to='/pizza'>
-            <button id="order-pizza">Order Pizza</button>
-        </Link>
+        <Link to='/pizza'>Order Pizza</Link>
         <Route exact path='/' component={Home} />
-        <Route path='/pizza' component={Pizza}/>
 
-        <Pizza 
+        <PizzaForm 
         values={formValues}
         change={inputChange}
         submit={formSubmit}
         disabled={disabled}
         errors={formErrors}
       />
+      {/* {
+        orders.map(order => {
+          return (
+            <Pizza key={order.id} details={order} />
+          )
+        })
+      } */}
     </div>
   );
 };
