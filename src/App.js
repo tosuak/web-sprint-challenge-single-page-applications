@@ -5,8 +5,7 @@ import * as yup from 'yup';
 import schema from './validation/formSchema';
 import PizzaForm from "./components/PizzaForm";
 import Home from "./components/Home";
-import Pizza from "./components/Pizza";
-import Confirmation from "./components/Confirmation";
+
 
 const initialFormValues = {
   name: '',
