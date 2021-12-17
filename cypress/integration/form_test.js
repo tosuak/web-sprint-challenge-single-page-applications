@@ -4,9 +4,9 @@ describe('pizza App', () => {
     })
 
     const name = () => cy.get('input[name=name]');
-    const pizzaSize = () => cy.get('input[name=lastName]');
-    const pizzaSauce = () => cy.get('input[name=username]');
-    const specialOrder = () => cy.get('input[name=email]');
+    const pizzaSize = () => cy.get('input[name=pizzaSize]');
+    const pizzaSauce = () => cy.get('input[name=pizzaSauce]');
+    const specialOrder = () => cy.get('input[name=specialOrder]');
     const orderButton = () => cy.get('button[id="order-button"]');
     const toppings = () => cy.get('input[class="toppings"]')
 
@@ -24,51 +24,41 @@ describe('pizza App', () => {
         pizzaSauce().should('exist');
         specialOrder().should('exist');
         orderButton().should('exist');
+        toppings().should('exist');
       })
 
-      describe('Filling out the inputs and cancelling', () => {
+      describe('Filling out the inputs', () => {
         it('can navigate to the site', () => {
           cy.url().should('include', 'localhost');
         })
     
         it('submit button starts out disabled', () => {
-          submitButton().should('be.disabled');
+          orderButton().should('be.disabled');
         })
 
         it('can type in the inputs', () => {
-            firstName()
+            name()
               .should('have.value', '')
               .type('Tafiqul')
               .should('have.value', 'Tafiqul')
       
-            lastName()
+            pizzaSize()
               .should('have.value', '')
-              .type('Tosuak')
-              .should('have.value', 'Tosuak')
-            
-            username()
-              .should('have.value', '')
-              .type('tosuak')
-              .should('have.value', 'tosuak')
+              .type('small')
+              .should('have.value', 'small')
 
-            email()
+            pizzaSauce()
               .should('have.value', '')
-              .type('tosuak@gmail.com')
-              .should('have.value', 'tosuak@gmail.com')
+              .type('original red')
+              .should('have.value', 'original red')
             
-            password()
-              .should('have.value', '')
-              .type('12345')
-              .should('have.value', '12345')
           })
       
           it('the submit button enables when both inputs are filled out', () => {
-            firstName().type('Tafiqul');
-            lastName().type('Tosuak');
-            username().type('tosuak');
-            email().type('tosuak@gmail.com');
-            password().type('12345');
-            submitButton().should('not.be.disabled');
+            name().type('Tafiqul');
+            pizzaSize().type('small');
+            pizzaSauce().type('original red');
+            orderButton().should('not.be.disabled');
           })
       
         })
